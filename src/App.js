@@ -1,25 +1,36 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import Customerlist from './components/Customerlist';
+import Traininglist from './components/Traininglist';
+
+
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import { Button } from '@material-ui/core';
 
 function App() {
+
+  const [list, setList] = React.useState(0);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppBar position="sticky">
+        <Toolbar>
+          <Typography variant="h6">
+            <h3>Personal Trainer</h3>
+            <div>
+              <Button style={{color: 'white', marginLeft: 20, marginRight: 20 }} onClick={() => setList('customer')}>Customerlist</Button>
+              <Button style={{color: 'white', marginLeft: 20 }} onClick={() => setList('training')}>Traininglist</Button>
+            </div>
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      {list === 'customer' ? <Customerlist /> : null}
+      {list === 'training' ? <Traininglist /> : null}
     </div>
   );
+
 }
 
 export default App;
