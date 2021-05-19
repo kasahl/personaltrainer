@@ -7,18 +7,15 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 
 function Traininglist() {
 
-    const [training, setTraining] = useState([]);
+    const [trainingList, setTrainingList] = useState([]);
 
     useEffect(() => fetchData(), []);
-
-    const dateStyle = () => {
-        moment().format("MMM Do YY");   
-    }
 
     const fetchData = () => {
         fetch('https://customerrest.herokuapp.com/api/trainings')
         .then(response => response.json())
-        .then (data => setTraining(data.content))
+        .then (data => setTrainingList(data.content))
+        .catch(err => console.error(err))
     }
 
     const columns = [
@@ -34,7 +31,7 @@ function Traininglist() {
     return (
         <div className="ag-theme-material" style={{ height: 1000, width: '100%', margin: 'auto'}}>
             <AgGridReact
-                rowData={training}
+                rowData={trainingList}
                 columnDefs={columns} 
             />
         </div>

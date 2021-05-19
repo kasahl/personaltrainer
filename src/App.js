@@ -3,7 +3,6 @@ import './App.css';
 import Customerlist from './components/Customerlist';
 import Traininglist from './components/Traininglist';
 
-
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -11,11 +10,11 @@ import { Button } from '@material-ui/core';
 
 function App() {
 
-  const [list, setList] = React.useState(0);
+  const [list, setList] = React.useState('customer');
 
   return (
     <div className="App">
-      <AppBar position="sticky">
+      <AppBar position="sticky" style={{backgroundColor: 'green'}}>
         <Toolbar>
           <Typography variant="h6">
             <h3>Personal Trainer</h3>
