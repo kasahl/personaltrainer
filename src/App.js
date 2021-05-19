@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Customerlist from './components/Customerlist';
 import Traininglist from './components/Traininglist';
+import CalendarPage from './components/CalendarPage';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { Button } from '@material-ui/core';
+import { Calendar, momentLocalizer } from 'react-big-calendar'
+import moment from 'moment'
 
 function App() {
 
@@ -19,12 +22,14 @@ function App() {
           <Typography variant="h6">
             <h3>Personal Trainer</h3>
             <div>
+              <Button style={{color: 'white', marginLeft: 20, marginRight: 20 }} onClick={() => setList('calendar')}>Calendar</Button>
               <Button style={{color: 'white', marginLeft: 20, marginRight: 20 }} onClick={() => setList('customer')}>Customerlist</Button>
               <Button style={{color: 'white', marginLeft: 20 }} onClick={() => setList('training')}>Traininglist</Button>
             </div>
           </Typography>
         </Toolbar>
       </AppBar>
+      {list === 'calendar' ? <CalendarPage /> : null}
       {list === 'customer' ? <Customerlist /> : null}
       {list === 'training' ? <Traininglist /> : null}
     </div>

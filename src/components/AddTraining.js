@@ -12,12 +12,16 @@ function AddTraining(props) {
         activity: '',
     });
 
+    const eventDay = new Date('2002-02-02');
+
     const handleClickOpen = () => {
-        console.log(props.training);
+        console.log(props.customerRef);
+        eventDay.toISOString()
         setTraining({
             date: '',
             duration: '',
             activity: '',
+            customer: props.customerRef,
         })
         setOpen(true);
     };
@@ -27,6 +31,10 @@ function AddTraining(props) {
     }
 
     const handleAdd = () => {
+        const eventDate = new Date(training.date)
+        setTraining({
+            date: eventDate.toISOString()
+        })
         props.addTraining(training);
         setOpen(false);
     }
@@ -39,7 +47,7 @@ function AddTraining(props) {
         <div>
         <Toolbar>
             <Button style={{ color: 'white', backgroundColor: 'gray' }} onClick={handleClickOpen}>
-                Add Customer
+                Add Training
             </Button>
         </Toolbar>
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">

@@ -13,18 +13,18 @@ import AddTraining from './AddTraining';
 function Customerlist() {
 
     const [customer, setCustomer] = useState([]);
-   // const [trainig, setTraining] = useState({});
+   const [trainig, setTraining] = useState([]);
     
     useEffect(() => fetchData(), []);
 
-   // useEffect(() => fetchTrainingData(), []);
+   useEffect(() => fetchTrainingData(), []);
 
-   /*const fetchTrainingData = () => {
-       fetch('https://customerrest.herokuapp.com/api/customers')
+   const fetchTrainingData = () => {
+       fetch('https://customerrest.herokuapp.com/api/trainings')
        .then(trainingResponse => trainingResponse.json())
        .then(trainingData => setTraining(trainingData.links[2].href))
        .catch(err => console.error(err))
-    }*/
+    }
 
     const fetchData = () => {
         fetch('https://customerrest.herokuapp.com/api/customers')
@@ -62,8 +62,8 @@ function Customerlist() {
         .catch(err => console.error(err))
     }
 
-    /*const addTraining = (newTraining) => {
-        fetch('https://customerrest.herokuapp.com/api/customers',
+    const addTraining = (newTraining) => {
+        fetch('https://customerrest.herokuapp.com/api/trainings',
         {
             method: 'POST',
             body: JSON.stringify(newTraining),
@@ -76,7 +76,7 @@ function Customerlist() {
                 alert('Something went wrong!');
         })
         .catch(err => console.error(err))
-    }*/
+    }
 
     const updateCustomer = (link, updatedCustomer) => {
         fetch(link, {
@@ -113,11 +113,11 @@ function Customerlist() {
                     <Delete />
                 </Iconbutton>
         },
-        /*{
+        {
             field: 'links.2.href', headerName: 'Trainings', width: '500',
             cellRendererFramework: params =>
-                <AddTraining addTraining={addTraining} training={params.trainingData} />
-        },   */ 
+                <AddTraining addTraining={addTraining} customerRef={params.data.links[1].href} />
+        }, 
         
         
     ]
