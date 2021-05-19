@@ -8,8 +8,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { Button } from '@material-ui/core';
-import { Calendar, momentLocalizer } from 'react-big-calendar'
-import moment from 'moment'
 
 function App() {
 

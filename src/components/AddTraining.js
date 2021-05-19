@@ -1,7 +1,5 @@
 import { AppBar, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, Toolbar } from '@material-ui/core';
 import React, { useState } from 'react';
-import EditIcon from '@material-ui/icons/Edit';
-import Iconbutton from '@material-ui/core/IconButton';
 
 function AddTraining(props) {
 
@@ -12,16 +10,13 @@ function AddTraining(props) {
         activity: '',
     });
 
-    const eventDay = new Date('2002-02-02');
-
     const handleClickOpen = () => {
-        console.log(props.customerRef);
-        eventDay.toISOString()
+        console.log(props.training);
         setTraining({
             date: '',
             duration: '',
             activity: '',
-            customer: props.customerRef,
+            customer: props.customerRef
         })
         setOpen(true);
     };
@@ -31,6 +26,7 @@ function AddTraining(props) {
     }
 
     const handleAdd = () => {
+        console.log(training.date)
         const eventDate = new Date(training.date)
         setTraining({
             date: eventDate.toISOString()
@@ -45,48 +41,48 @@ function AddTraining(props) {
 
     return(
         <div>
-        <Toolbar>
-            <Button style={{ color: 'white', backgroundColor: 'gray' }} onClick={handleClickOpen}>
-                Add Training
-            </Button>
-        </Toolbar>
-        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Add training</DialogTitle>
-            <DialogContent>
-                    <TextField 
-                        margin="dense"
-                        label="Date"
-                        name="date"
-                        value={training.date}
-                        onChange={inputChanged}
-                    />
-                    <a> </a>
-                    <TextField 
-                        margin="dense"
-                        label="Activity"
-                        name="activity"
-                        value={training.activity}
-                        onChange={inputChanged}
-                    />
-                    <a> </a>
-                    <TextField 
-                        margin="dense"
-                        label="Duration"
-                        name="duration"
-                        value={training.duration}
-                        onChange={inputChanged}
-                    />
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={handleAdd} style={{ color: 'white', backgroundColor: 'green'}}>
-                    Add
+            <Toolbar>
+                <Button style={{ color: 'white', backgroundColor: 'gray' }} onClick={handleClickOpen}>
+                    Add Training
                 </Button>
-                <Button onClick={handleClose} style={{ color: 'white', backgroundColor: 'red'}}>
-                    Cancel
-                </Button>
-            </DialogActions>
-        </Dialog>
-    </div>
+            </Toolbar>
+            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title">Add training</DialogTitle>
+                <DialogContent>
+                        <TextField 
+                            margin="dense"
+                            label="Date"
+                            name="date"
+                            value={training.date}
+                            onChange={inputChanged}
+                        />
+                        <a> </a>
+                        <TextField 
+                            margin="dense"
+                            label="Activity"
+                            name="activity"
+                            value={training.activity}
+                            onChange={inputChanged}
+                        />
+                        <a> </a>
+                        <TextField 
+                            margin="dense"
+                            label="Duration"
+                            name="duration"
+                            value={training.links}
+                            onChange={inputChanged}
+                        />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleAdd} style={{ color: 'white', backgroundColor: 'green'}}>
+                        Add
+                    </Button>
+                    <Button onClick={handleClose} style={{ color: 'white', backgroundColor: 'red'}}>
+                        Cancel
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </div>
     )
 }
 

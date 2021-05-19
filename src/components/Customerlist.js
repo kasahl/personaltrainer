@@ -2,25 +2,24 @@ import React, {useState, useEffect} from 'react';
 import { AgGridReact} from 'ag-grid-react';
 import AddCustomer from "./AddCustomer"
 import EditCustomer from './EditCustomer';
+import AddTraining from './AddTraining';
 
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import Delete from '@material-ui/icons/Delete';
 import Iconbutton from '@material-ui/core/IconButton';
-import moment, { isMoment } from 'moment';
-import AddTraining from './AddTraining';
 
 function Customerlist() {
 
     const [customer, setCustomer] = useState([]);
-   const [trainig, setTraining] = useState([]);
+    const [training, setTraining] = useState({});
     
     useEffect(() => fetchData(), []);
 
    useEffect(() => fetchTrainingData(), []);
 
    const fetchTrainingData = () => {
-       fetch('https://customerrest.herokuapp.com/api/trainings')
+       fetch('https://customerrest.herokuapp.com/api/customers')
        .then(trainingResponse => trainingResponse.json())
        .then(trainingData => setTraining(trainingData.links[2].href))
        .catch(err => console.error(err))
@@ -30,6 +29,7 @@ function Customerlist() {
         fetch('https://customerrest.herokuapp.com/api/customers')
         .then(response => response.json())
         .then(data => setCustomer(data.content))
+        .then((response) => {console.log(response)})
         .catch(err => console.error(err))
     }
 
@@ -94,30 +94,30 @@ function Customerlist() {
     }
     
     const columns = [
-        { field: 'firstname', sortable: true, filter: true },
-        { field: 'lastname', sortable: true, filter: true },
-        { field: 'streetaddress', headerName: 'Street address', sortable: true, filter: true },
-        { field: 'postcode', sortable: true, filter: true },
-        { field: 'city', sortable: true, filter: true },
+        { field: 'firstname', sortable: true, filter: true, width: 150 },
+        { field: 'lastname', sortable: true, filter: true, width: 150 },
+        { field: 'streetaddress', headerName: 'Street address', sortable: true, filter: true, width: 200 },
+        { field: 'postcode', sortable: true, filter: true, width: 200 },
+        { field: 'city', sortable: true, filter: true, width: 200 },
         { field: 'email', sortable: true, filter: true },
         { field: 'phone', headerName: 'Phone number', sortable: true, filter: true },
         {
-            field: 'links.1.href', headerName: '', width: 100,
+            field: 'links.1.href', headerName: '', width: 70,
             cellRendererFramework: params => 
                 <EditCustomer link={params.value} customer={params.data} updateCustomer={updateCustomer} />
         },
         {
-            field: 'links.1.href', headerName: '', width: 100,
+            field: 'links.1.href', headerName: '', width: 80,
             cellRendererFramework: params => 
                 <Iconbutton onClick={() => deleteCustomer(params.value)} style={{ color: 'red' }}>
                     <Delete />
                 </Iconbutton>
         },
         {
-            field: 'links.2.href', headerName: 'Trainings', width: '500',
+            field: 'links.2.href', headerName: 'Trainings', width: 230,
             cellRendererFramework: params =>
                 <AddTraining addTraining={addTraining} customerRef={params.data.links[1].href} />
-        }, 
+        },   
         
         
     ]
